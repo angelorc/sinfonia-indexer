@@ -1,0 +1,31 @@
+# MODEL
+##########
+
+type Transaction @goModel(model: "sinfonia-indexer/model.Transaction") {
+    id: ObjectID!
+    hash: String!
+    created_at: Time!
+    updated_at: Time!
+}
+
+# ENUM
+##########
+enum TransactionOrderByENUM @goModel(model: "sinfonia-indexer/model.TransactionOrderByENUM") {
+    created_at_ASC
+    created_at_DESC
+    updated_at_ASC
+    updated_at_DESC
+}
+
+# DTO
+##########
+
+# Read
+input TransactionWhereUniqueDTO @goModel(model: "sinfonia-indexer/model.TransactionWhereUniqueDTO") {
+    id: ObjectID!
+}
+
+input TransactionWhereDTO @goModel(model: "sinfonia-indexer/model.TransactionWhereDTO") {
+    id: ObjectID
+    hash: String
+}
