@@ -1,7 +1,7 @@
 # MODEL
 ##########
 
-type Transaction @goModel(model: "sinfonia-indexer/model.Transaction") {
+type Transaction @goModel(model: "github.com/angelorc/sinfonia-indexer/model.Transaction") {
     id: ObjectID!
     hash: String!
     created_at: Time!
@@ -10,7 +10,7 @@ type Transaction @goModel(model: "sinfonia-indexer/model.Transaction") {
 
 # ENUM
 ##########
-enum TransactionOrderByENUM @goModel(model: "sinfonia-indexer/model.TransactionOrderByENUM") {
+enum TransactionOrderByENUM @goModel(model: "github.com/angelorc/sinfonia-indexer/model.TransactionOrderByENUM") {
     created_at_ASC
     created_at_DESC
     updated_at_ASC
@@ -21,11 +21,11 @@ enum TransactionOrderByENUM @goModel(model: "sinfonia-indexer/model.TransactionO
 ##########
 
 # Read
-input TransactionWhereUniqueDTO @goModel(model: "sinfonia-indexer/model.TransactionWhereUniqueDTO") {
+input TransactionWhereUniqueDTO @goModel(model: "github.com/angelorc/sinfonia-indexer/model.TransactionWhereUniqueDTO") {
     id: ObjectID!
 }
 
-input TransactionWhereDTO @goModel(model: "sinfonia-indexer/model.TransactionWhereDTO") {
+input TransactionWhereDTO @goModel(model: "github.com/angelorc/sinfonia-indexer/model.TransactionWhereDTO") {
     id: ObjectID
     hash: String
 }

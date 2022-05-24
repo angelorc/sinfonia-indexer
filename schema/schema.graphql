@@ -14,8 +14,8 @@ directive @goField(forceResolver: Boolean, name: String) on INPUT_FIELD_DEFINITI
 # SCALAR
 ##########
 scalar Time
-scalar ObjectID @goModel(model: "sinfonia-index/scalar.ObjectIDScalar")
-scalar Json @goModel(model: "sinfonia-index/scalar.JSONScalar")
+scalar ObjectID @goModel(model: "github.com/angelorc/sinfonia-indexer/scalar.ObjectIDScalar")
+scalar Json @goModel(model: "github.com/angelorc/sinfonia-indexer/scalar.JSONScalar")
 
 # QUERY
 ##########
