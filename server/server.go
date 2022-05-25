@@ -9,9 +9,8 @@ import (
 	"github.com/99designs/gqlgen/graphql/handler/transport"
 	"github.com/99designs/gqlgen/graphql/playground"
 	c "github.com/angelorc/sinfonia-indexer/config"
-	"github.com/angelorc/sinfonia-indexer/dataloader"
-	"github.com/angelorc/sinfonia-indexer/generated/gqlgen"
-	"github.com/angelorc/sinfonia-indexer/resolver"
+	"github.com/angelorc/sinfonia-indexer/graph"
+	"github.com/angelorc/sinfonia-indexer/graph/generated"
 	"github.com/angelorc/sinfonia-indexer/utility"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
@@ -32,7 +31,7 @@ func New() {
 	e.HideBanner = true
 
 	// Load routes from graphql
-	// InitGraphql(e)
+	InitGraphql(e)
 
 	// Load routes from rest
 	InitRest(e)
@@ -81,19 +80,13 @@ func getHeaders(next echo.HandlerFunc) echo.HandlerFunc {
 
 func InitGraphql(e *echo.Echo) {
 	// Resolvers && Directives
-	resolver := resolver.Resolver{Token: &token}
-	config := gqlgen.Config{Resolvers: &resolver}
+	resolver := graph.Resolver{Token: &token}
+	config := generated.Config{Resolvers: &resolver}
 
-	/*config.Directives.Auth = func(ctx context.Context, obj interface{}, next graphql.Resolver, role []guard.Role) (interface{}, error) {
-		if err := guard.Auth(role, *resolver.Token); err != nil {
-			return nil, fmt.Errorf("Access denied")
-		}
-		return next(ctx)
-	}*/
 	e.Use(getHeaders)
 
 	// new custom handler based on gqlgen version 0.11.3
-	queryHandler := handler.New(gqlgen.NewExecutableSchema(config))
+	queryHandler := handler.New(generated.NewExecutableSchema(config))
 
 	// queryHandler.Use(&debug.Tracer{})
 	queryHandler.AddTransport(transport.POST{})
@@ -111,5 +104,6 @@ func InitGraphql(e *echo.Echo) {
 	})
 
 	e.GET("/", echo.WrapHandler(playground.Handler("GraphQL Playground", c.GetSecret("GRAPHQL_ENDPOINT"))))
-	e.POST("/query", echo.WrapHandler(dataloader.DataLoaderMiddleware(queryHandler)))
+	//e.POST("/query", echo.WrapHandler(dataloader.DataLoaderMiddleware(queryHandler)))
+	e.POST("/query", echo.WrapHandler(queryHandler))
 }

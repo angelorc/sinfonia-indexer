@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/angelorc/sinfonia-indexer/config"
 	"github.com/angelorc/sinfonia-indexer/db"
+	"github.com/angelorc/sinfonia-indexer/server"
 	"github.com/angelorc/sinfonia-indexer/utility"
 )
 
@@ -23,4 +24,13 @@ func main() {
 	}
 	defaultDB.Init()
 	defer defaultDB.Disconnect()
+
+	/**
+	 * Create custom mongo indexes
+	 */
+
+	/*
+	 * Start http server
+	 */
+	server.New()
 }

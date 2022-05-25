@@ -18,7 +18,7 @@ import (
  */
 
 const DB_COLLECTION_NAME__TRANSACTION = "Transaction"
-const DB_REF_NAME__TRANSACTION = "default"
+const DB_REF_NAME__TRANSACTION = "sinfonia-indexer"
 
 /**
  * SEARCH regex fields

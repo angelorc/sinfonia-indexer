@@ -1,5 +1,7 @@
-generate:
-	@if [ -d tmp ]; then rm -r tmp; fi;
+gql-init:
+	@go run github.com/99designs/gqlgen init
+
+gql-generate:
 	@go run github.com/99designs/gqlgen generate
 
-.PHONY: generate
+.PHONY: gql-init gql-generate
